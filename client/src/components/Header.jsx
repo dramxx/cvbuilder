@@ -40,6 +40,14 @@ const Header = () => {
                 </Typography>
               </IconButton>
             </Link>
+
+            <Link to={ROUTES.documents} style={linkStyles}>
+              <IconButton size="small" color="inherit" aria-label="menu">
+                <Typography variant="h8" style={{ marginRight: "20px" }}>
+                  Documents
+                </Typography>
+              </IconButton>
+            </Link>
           </Box>
 
           <Box>

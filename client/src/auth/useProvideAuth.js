@@ -7,15 +7,11 @@ import { getJwt, saveJwt, removeJwt } from "../common/utils";
 
 export const useProvideAuth = () => {
   const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  console.log("isAuthenticated", isAuthenticated);
 
   useEffect(() => {
     const jwt = getJwt();
     if (jwt) {
       setUser(jwt);
-      setIsAuthenticated(true);
     }
   }, []);
 
@@ -30,7 +26,6 @@ export const useProvideAuth = () => {
 
           saveJwt(jwt);
           setUser(jwt);
-          setIsAuthenticated(true);
 
           cb();
         })
@@ -42,14 +37,12 @@ export const useProvideAuth = () => {
     return manageAuth.signout(() => {
       setUser(null);
       removeJwt();
-      setIsAuthenticated(false);
       cb();
     });
   };
 
   return {
     user,
-    isAuthenticated,
     signin,
     signout,
   };
