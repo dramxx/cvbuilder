@@ -1,8 +1,7 @@
 import { createContext, useContext } from "react";
+import PropTypes from "prop-types";
 
 import { useProvideAuth } from "./useProvideAuth";
-
-import PropTypes from "prop-types";
 
 const authContext = createContext();
 
@@ -11,6 +10,7 @@ export const ProvideAuth = ({ children }) => {
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   return useContext(authContext);
 };

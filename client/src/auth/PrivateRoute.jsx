@@ -1,11 +1,13 @@
 import { Route, Redirect } from "react-router-dom";
-import { ROUTES } from "../common/configs";
-import { useAuth } from "./ProvideAuth";
-
 import PropTypes from "prop-types";
+
+import { ROUTES } from "../common/config";
+import { useAuth } from "../auth/ProvideAuth";
 
 const PrivateRoute = ({ children, ...rest }) => {
   let auth = useAuth();
+
+  console.log("auth.user", auth.user);
 
   return (
     <Route
