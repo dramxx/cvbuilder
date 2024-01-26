@@ -21,6 +21,7 @@ app.listen(API_PORT, () => console.log(`SERVER RUNNING @ ${API_PORT}`));
 /**
  * Connect to MongoDB
  */
+mongoose.set("strictQuery", false);
 mongoose.connect(
   process.env.DB_CONNECT,
   { useNewUrlParser: true, useUnifiedTopology: true },
