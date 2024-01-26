@@ -1,7 +1,5 @@
-import "./App.css";
-
 function App() {
-  return <div>placeholder</div>;
+  return <div>CV_BUILDER</div>;
 }
 
 export default App;
