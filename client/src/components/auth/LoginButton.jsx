@@ -40,6 +40,7 @@ const LoginButton = () => {
     auth
       .signin(() => {
         history.replace(from);
+        setOpen(false);
       }, user)
       .catch((err) => {
         setErrorMessage(err.message);
