@@ -25,6 +25,7 @@ const LoginButton = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleOpen = () => {
     setOpen(true);
@@ -36,10 +37,13 @@ const LoginButton = () => {
 
   const handleLogin = () => {
     const user = { email, password };
-    auth.signin(() => {
-      history.replace(from);
-    }, user);
-    handleClose();
+    auth
+      .signin(() => {
+        history.replace(from);
+      }, user)
+      .catch((err) => {
+        setErrorMessage(err.message);
+      });
   };
 
   return (
@@ -58,6 +62,8 @@ const LoginButton = () => {
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Login</DialogTitle>
           <DialogContent>
+            {errorMessage && <div>{errorMessage}</div>}
+
             <TextField
               autoFocus
               margin="dense"

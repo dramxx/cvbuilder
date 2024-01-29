@@ -15,29 +15,34 @@ export const useProvideAuth = () => {
     }
   }, []);
 
-  const signin = (cb, user) => {
-    return manageAuth.signin(() => {
-      axios
-        .post(API_ROUTES.auth.login, user)
-        .then((response) => {
-          const jwt = response.data;
-
-          if (!jwt) return console.error(response);
-
-          saveJwt(jwt);
-          setUser(jwt);
-
-          cb();
-        })
-        .catch((error) => console.error(error));
+  const signin = (callback, user) => {
+    return new Promise((resolve, reject) => {
+      manageAuth.signin(() => {
+        axios
+          .post(API_ROUTES.auth.login, user)
+          .then((response) => {
+            const jwt = response.data;
+            if (!jwt) {
+              reject("No JWT token in: " + response);
+            } else {
+              saveJwt(jwt);
+              setUser(jwt);
+              callback();
+              resolve();
+            }
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
     });
   };
 
-  const signout = (cb) => {
+  //FIXME: login popup is openen on signout
+  const signout = () => {
     return manageAuth.signout(() => {
       setUser(null);
       removeJwt();
-      cb();
     });
   };
 
