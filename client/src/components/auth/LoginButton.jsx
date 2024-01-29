@@ -13,7 +13,8 @@ import {
 } from "@mui/material";
 
 import { useAuth } from "../../auth/ProvideAuth";
-import { ROUTES } from "../../common/config";
+import { ROUTES, THEME } from "../../common/config";
+import { generateErrorMessage } from "../../common/helpers";
 
 const LoginButton = () => {
   let history = useHistory();
@@ -43,7 +44,7 @@ const LoginButton = () => {
         setOpen(false);
       }, user)
       .catch((err) => {
-        setErrorMessage(err.message);
+        setErrorMessage(generateErrorMessage(err));
       });
   };
 
@@ -56,14 +57,21 @@ const LoginButton = () => {
           aria-label="menu"
           onClick={handleOpen}
         >
-          <Typography variant="h8" style={{ marginRight: "20px" }}>
-            Login
-          </Typography>
+          <Typography variant="h8">Login</Typography>
         </IconButton>
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Login</DialogTitle>
           <DialogContent>
-            {errorMessage && <div>{errorMessage}</div>}
+            <Typography
+              variant="h8"
+              style={{
+                display: "block",
+                marginBottom: "20px",
+                color: THEME.colors.error,
+              }}
+            >
+              {errorMessage && <div>{errorMessage}</div>}
+            </Typography>
 
             <TextField
               autoFocus

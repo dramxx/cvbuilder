@@ -17,3 +17,11 @@ export const ROUTES = {
   documents: "/documents",
   unauthorized: "/unauthorized",
 };
+
+export const THEME = {
+  colors: {
+    default: "#333",
+    backgroundPrimary: "#f5f5f5",
+    error: "#f44336",
+  },
+};

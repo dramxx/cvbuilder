@@ -37,3 +37,25 @@ export const httpPostData = (url, data) => {
 
   return axios.post(url, data, { headers: header });
 };
+
+export const httpPutData = (url, data) => {
+  const token = getJwt();
+  const header = {
+    "auth-token": token,
+    "content-type": "application/json",
+    Accept: "application/json",
+  };
+
+  return axios.put(url, data, { headers: header });
+};
+
+export const httpDeleteData = (url) => {
+  const token = getJwt();
+  const header = {
+    "auth-token": token,
+    "content-type": "application/json",
+    Accept: "application/json",
+  };
+
+  return axios.delete(url, { headers: header });
+};
