@@ -38,7 +38,6 @@ export const useProvideAuth = () => {
     });
   };
 
-  //FIXME: login popup is openen on signout
   const signout = (cb) => {
     return manageAuth.signout(() => {
       setUser(null);
